@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+class Node{
+    public:
+    int data;
+    Node *add;
+    
+    Node(int val){
+        data=val;
+        add=NULL;
+    }
+};
+void traversal(Node *head)
+{
+    Node *temp=head;
+    while(temp!=NULL)
+    {
+        cout<<temp->data<<"->";
+        temp=temp->add;
+    }
+    cout<<"NULL";
+}
+void insert_at_begining(Node* &head,int val)
+{
+    Node *nn=new Node(val);
+    nn->add=head;
+    head=nn;
+    
+}
+void insert_at_endind(Node* &head, int val)
+{
+    Node *nn=new Node(val);
+    Node* temp=head;
+    while(temp!=NULL){
+        temp=temp->add;
+    }
+    temp->add=nn;
+}
+int main()
+{
+    Node* node1=new Node(10);
+    Node* node2=new Node(20);
+    node1->add=node2;
+    Node *head=node1;
+    //traversal(head);
+    //insert_at_begining(head,50);
+    //traversal(head);
+    insert_at_endind(head,70);
+    traversal(head);
+    
+}
