@@ -1,0 +1,143 @@
+#include<bits/stdc++.h>
+using namespace std;
+class Node{
+  public:
+  int data;
+  Node*next;
+  
+  Node(int val){
+      data=val;
+      next=NULL;
+  }
+};
+void traversal(Node * head){
+    Node * temp=head;
+    while(temp!=NULL){
+        cout<<temp->data<<"->";
+        temp=temp->next;
+    }
+    cout<<"NULL";
+}
+void intsertAt_head(Node * &head, int val){
+    Node * nn= new Node(val);
+    Node * temp=head;
+    nn->next=head;
+    head=nn;
+}
+void intsertAt_end(Node * &head,int val){
+    Node*nn=new Node(val);
+    Node*temp=head;
+    if(head==NULL){
+        intsertAt_head(head,val);
+        return;
+    }
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    temp->next=nn;
+}
+void insertAt_middle(Node* &head,int val,int pos)
+{
+    Node* nn=new Node(val);
+    Node* prev=head;
+    if(pos==1){
+        intsertAt_head(head,val);
+        return;
+    }
+    int cnt=1;
+    while(cnt<pos-1){
+        prev=prev->next;
+        cnt++;
+    }
+    nn->next=prev->next;
+    prev->next=nn;
+    
+}
+void deleteAt_head(Node* &head){
+    if(head==NULL){
+        return;
+    }
+    Node* temp=head;
+    head=head->next;
+    free(temp);
+}
+void deleteAt_end(Node* & head){
+    if(head==NULL){
+        return;
+    }
+    if(head->next==NULL){
+        deleteAt_head(head);
+        return;
+    }
+    Node* secondLastnode=head;
+    while(secondLastnode->next->next!=NULL){
+        secondLastnode=secondLastnode->next;
+    }
+    Node*lastnode=secondLastnode->next;
+    secondLastnode->next=NULL;
+    free(lastnode);
+}
+void deleteAt_middle(Node* &head,int pos){
+    if(pos==1){
+        deleteAt_head(head);
+        return;
+    }
+    Node* temp=head;
+    int cnt=1;
+    while(cnt<pos-1)
+    {
+        temp=temp->next;
+        cnt++;
+    }
+    Node* deleNOde=temp->next;
+    temp->next=deleNOde->next;
+    free(deleNOde);
+    
+}
+void updataValue(Node* &head,int pos,int value){
+    Node*temp=head;
+    int cnt=1;
+    while(cnt<pos){
+        temp=temp->next;
+        cnt++;
+    }
+    temp->data=value;
+    
+    
+    
+}
+int main(){
+    Node * n1=new Node(10);
+    Node * n2=new Node(20);
+    n1->next=n2;
+    Node * head=n1;
+    traversal(head);
+    cout<<endl;
+    //insert ar head
+    intsertAt_head(head,30);
+    traversal(head);
+    cout<<endl;
+    //insertat end
+    intsertAt_end(head,40);
+    traversal(head);
+    cout<<endl;
+    //insertAt_middle
+    insertAt_middle(head,50,2);
+    traversal(head);
+    cout<<endl;
+    //deleteAt_head
+    deleteAt_head(head);
+    traversal(head);
+    cout<<endl;
+    //deleteAt_end
+    deleteAt_end(head);
+    traversal(head);
+    cout<<endl;
+    //deleteAt_middle
+    deleteAt_middle(head,3);
+    traversal(head);
+    cout<<endl;
+    //updataValue
+    updataValue(head,5,780);
+    traversal(head);
+}
