@@ -1,0 +1,75 @@
+#include<bits/stdc++.h>
+using namespace std;
+class Node{
+  public:
+  int data;
+  Node* next;
+  
+  Node(int val){
+      data=val;
+      next=NULL;
+  }
+};
+void InsertAtEnd(Node* &head,int val){
+    Node * nn=new Node(val);
+    if(head==NULL){
+        head=nn;
+    }
+    Node * temp=head;
+    while(temp->next!=NULL){
+        temp=temp->next;
+        
+    }
+    temp->next=nn;
+}
+void RotateByKnodes(Node* &head,int k){
+    Node* temp=head;
+    int cnt=1;
+    //count the all the nodes
+    while(temp->next){
+        cnt++;
+        temp=temp->next;
+    }
+    //temp pointing to last node
+    1)make the last node point to the head
+    temp->next=head;
+    
+    k=k%cnt;
+    if(k==0){
+        return;
+    }
+    // reuse the temp pointer
+    temp=head;
+    2) find (n-k)th node
+    for(int i=1;i<(cnt-k);i++){
+        temp=temp->next;
+    }
+    head=temp->next; //new head
+    3) (n-k)th node point to null
+    temp->next=NULL;
+}
+void traverse(Node* head){
+    if(head==NULL) return;
+    Node* temp=head;
+    while(temp){
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+}
+int main(){
+    Node * n=new Node(5);
+    Node* head=n;
+    InsertAtEnd(head,8);
+    InsertAtEnd(head,3);
+    InsertAtEnd(head,1);
+    InsertAtEnd(head,2);
+    InsertAtEnd(head,7);
+    RotateByKnodes(head,9);
+    traverse(head);
+    
+   
+    
+   
+    
+    
+}
