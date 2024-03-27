@@ -1,0 +1,83 @@
+#include<bits/stdc++.h>
+using namespace std;
+class Node{
+  public:
+  int data;
+  Node* next;
+  
+  Node(int val){
+      data=val;
+      next=NULL;
+  }
+};
+void InsertAtEnd(Node* &head,int val){
+    Node * nn=new Node(val);
+    if(head==NULL){
+        head=nn;
+    }
+    Node * temp=head;
+    while(temp->next!=NULL){
+        temp=temp->next;
+        
+    }
+    temp->next=nn;
+}
+bool palin(Node* head){
+    Node*temp=head;
+    if(head==NULL) return NULL;
+    Node * slow=head;
+    Node* fast=head->next;
+    while(fast!=NULL && fast->next!=NULL){
+        slow=slow->next;
+        fast=fast->next;
+    }
+    Node* curr=slow;
+    Node * prev=NULL;
+    Node* next;
+    while(curr){
+        next=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=next;
+    }
+    Node *kk=prev;
+    while(kk){
+        if(temp->data!=kk->data){
+            return false;
+        }
+        kk=kk->next;
+        temp=temp->next;
+    }
+    return true;
+}
+// Node* ReverseLL(Node * &head){
+//     if(head==NULL) return NULL;
+//     Node *curr=head;
+//     Node*prev=NULL;
+//     Node *next;
+//     while(curr){
+//         next=curr->next;
+//         curr->next=prev;
+//         prev=curr;
+//         curr=next;
+//     }
+//     return prev;
+// }
+int main(){
+    Node * n=new Node(5);
+    Node* head=n;
+    InsertAtEnd(head,5);
+    InsertAtEnd(head,3);
+    InsertAtEnd(head,1);
+    Node* te=head;
+    cout<<palin(head);
+   
+    
+    // Node * temp=hh;
+    // while(temp){
+    //     cout<<temp->data<<" ";
+    //     temp=temp->next;
+    // }
+    
+    
+}
